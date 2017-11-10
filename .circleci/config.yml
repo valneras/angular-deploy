@@ -34,5 +34,14 @@ jobs:
           key: v1-dependencies-{{ checksum "package.json" }}
 
       # run tests!
-      - run: yarn ng test -sr --no-progress
-      - run: yarn ng build --prod --no-progress
+      - run: yarn ng build --prod --build-optimizer --no-progress
+      - run: yarn ng test --single-run --no-progress
+      - run:
+          command: |
+            docker build -t angulardeploy.azurecr.io/angular-cli-nginx:1.0 .
+      - run:
+          command: |
+            docker login --username __DOCKER_USER__ --password __DOCKER_PASS__ angulardeploy.azurecr.io
+      - run:
+          command: |
+            docker push awesomeapp.azurecr.io/angular-cli-nginx:1.0
