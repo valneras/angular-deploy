@@ -45,4 +45,4 @@ jobs:
             docker login --username $DOCKER_USER --password $DOCKER_PASS angulardeploy.azurecr.io
       - run:
           command: |
-            docker push awesomeapp.azurecr.io/angular-cli-nginx:1.0
+            docker push angulardeploy.azurecr.io/angular-cli-nginx:1.0
