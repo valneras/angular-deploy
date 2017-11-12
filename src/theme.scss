@@ -1,0 +1,37 @@
+@import '~@angular/material/_theming';
+
+@include mat-core();
+
+$primary: mat-palette($mat-red);
+$accent: mat-palette($mat-blue);
+
+$theme: mat-light-theme($primary, $accent);
+
+@include angular-material-theme($theme);
+
+.dark-theme {
+  $dark-primary: mat-palette($mat-blue-grey);
+  $dark-accent: mat-palette($mat-amber);
+  $dark-theme: mat-light-theme($dark-primary, $dark-accent);
+
+  $candy-app-primary: mat-palette($mat-blue-grey, A200, A100, A400);
+  $candy-app-accent:  mat-palette($mat-pink, A200, A100, A400);
+  $candy-app-theme:   mat-light-theme($candy-app-primary, $candy-app-accent);
+
+  $toolbar-app-primary: mat-palette($mat-blue-grey, A200, A100, A400);
+  $toolbar-app-accent:  mat-palette($mat-red, 100);
+  $toolbar-app-theme:   mat-light-theme($toolbar-app-primary, $toolbar-app-accent);
+
+  @include angular-material-theme($dark-theme);
+  @include mat-card-theme($candy-app-theme);
+  @include mat-toolbar-theme($toolbar-app-theme);
+
+  .mat-toolbar{
+    z-index: 99999;
+    .mat-transparent {
+      background-color: rgba(0, 0, 0, 0) !important;
+    }
+  }
+
+
+}

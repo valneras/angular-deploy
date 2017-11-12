@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {Component, HostListener, ViewChild} from '@angular/core';
 import {Router, RouterLink} from '@angular/router';
 
 @Component({
@@ -7,8 +7,11 @@ import {Router, RouterLink} from '@angular/router';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
+  @ViewChild('content') content;
+  setColor = false;
   year = new Date().getFullYear();
   title = 'Angular demo App by VinZ!!';
+  isDarkTheme = true;
   // logo = require('../assets/logo.png');
   navigation = [
     { link: 'about', label: 'About' },
@@ -21,5 +24,10 @@ export class AppComponent {
   ];
   constructor(private router: Router){
 
+  }
+
+  onScrollEvent($event) {
+    console.log($event);
+    this.setColor = this.content.nativeElement.getBoundingClientRect().top < 14;
   }
 }

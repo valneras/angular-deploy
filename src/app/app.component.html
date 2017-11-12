@@ -1,63 +1,90 @@
-<mat-sidenav-container>
-
+<div fxLayout="column" fxFlex [class.dark-theme]="isDarkTheme" (scroll)="onScrollEvent($event)">
+ <mat-sidenav-container cdk-scrollable fullscreen style="height: 100%; overflow: auto;">
   <mat-sidenav #sidenav mode="push">
-    <div class="branding"><mat-icon>home</mat-icon> <span>Angular DEMO</span></div>
-    <mat-nav-list>
-      <a mat-list-item *ngFor="let item of navigationSideMenu" (click)="sidenav.close()"
-         [routerLink]="[item.link]" routerLinkActive="active">
-        {{item.label}}
-      </a>
-    </mat-nav-list>
+     <div class="branding"><mat-icon>home</mat-icon> <span>Angular DEMO</span></div>
+     <mat-nav-list>
+       <a mat-list-item *ngFor="let item of navigationSideMenu" (click)="sidenav.close()"
+          [routerLink]="[item.link]" routerLinkActive="active">
+         {{item.label}}
+       </a>
+     </mat-nav-list>
   </mat-sidenav>
 
-  <div class="wrapper">
-
-    <mat-toolbar color="primary">
-      <button mat-icon-button class="hidden-md-up" (click)="sidenav.open()">
-        <mat-icon>menu</mat-icon>
-      </button>
-
-      <span routerLink="" class="branding spacer hidden-md-up text-center">Angular DEMO</span>
-      <span routerLink="" class="branding spacer hidden-sm-down title">Hi Bro!</span>
-
-      <span class="hidden-sm-down">
-        <button mat-button class="nav-button" *ngFor="let item of navigation"
-                [routerLink]="[item.link]" routerLinkActive="active">
-          {{item.label}}
+   <mat-sidenav-content (scroll)="onScrollEvent($event)">
+    <header>
+      <mat-toolbar style="position:fixed;" color="{{ setColor ? 'primary' : 'transparent' }}">
+        <button mat-icon-button (click)="sidenav.open()" fxHide fxShow.lt-md>
+          <mat-icon>clear_all</mat-icon>
         </button>
-      </span>
 
+        <span routerLink="">Angular DEMO</span>
 
-      <button mat-icon-button routerLink="settings" class="hidden-sm-down">
-        <mat-icon>settings</mat-icon>
-      </button>
+        <span fxHide fxShow.gt-sm>
+          <button mat-button class="nav-button" *ngFor="let item of navigation"
+                  [routerLink]="[item.link]" routerLinkActive="active">
+            {{item.label}}
+          </button>
+        </span>
 
-      <a matTooltip="Project Github Repository"
-         matdTooltipPosition="before"
-         mat-icon-button class="link"
-         href="https://github.com/valneras/angular-deploy"
-         target="_blank">
-        <i class="fa fa-github fa-2x"></i>
-      </a>
+        <span class="fill-remaining-space"></span>
 
-    </mat-toolbar>
+        <button mat-icon-button routerLink="settings">
+          <mat-icon>settings</mat-icon>
+        </button>
 
-    <div class="content">
-         <!--[@routerTransition]="o.isActivated && o.activatedRoute.routeConfig.path">-->
-      <!--<router-outlet #o="outlet"></router-outlet>-->
-    </div>
+        <a matTooltip="Project Github Repository"
+           matdTooltipPosition="before"
+           mat-icon-button class="link"
+           href="https://github.com/valneras/angular-deploy"
+           target="_blank">
+          <i class="fa fa-github fa-2x"></i>
+        </a>
 
-    <div class="footer">
-      <div class="row">
-        <div class="col-sm-12 links">
+      </mat-toolbar>
+    </header>
+
+    <main>
+        <div #content class="content">
+          <div fxLayout="row" fxLayout.lt-md="column" fxLayoutGap="16px">
+            <mat-card fxFlex="80">
+              <mat-icon>report</mat-icon>
+              <h2>Hi Bro!</h2>
+              <p>Test2</p>
+            </mat-card>
+
+            <mat-card fxFlex fxLayout="column" fxLayoutGap="14px">
+              <mat-slide-toggle>Is Admin?</mat-slide-toggle>
+              <mat-slide-toggle>Is Cool?</mat-slide-toggle>
+            </mat-card>
+
+          </div>
+          <div fxLayout="row">
+            <mat-card fxFlex>
+              <mat-icon>report</mat-icon>
+              <h2>Other box</h2>
+              <span>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent vulputate ante at suscipit accumsan. Morbi condimentum enim non ex facilisis, sit amet bibendum ipsum euismod. Nam pharetra augue odio. Praesent nec vulputate eros. Sed eleifend accumsan urna, nec pretium lectus interdum id. Nam erat est, iaculis non purus id, lobortis ultrices elit. In vitae felis est. Sed pulvinar tincidunt rutrum. Duis ultricies mauris at justo rhoncus accumsan. Sed interdum sapien placerat lectus lobortis, et consequat ex ornare.
+
+  Aliquam pellentesque mattis dapibus. Mauris ut auctor est. Donec tellus metus, feugiat vulputate consequat non, rhoncus ac nulla. Praesent ipsum felis, blandit eu pulvinar a, iaculis vel leo. Sed blandit rhoncus erat vitae vestibulum. In turpis ex, finibus sed maximus non, ullamcorper vitae sem. Morbi sodales, neque vitae mollis tempor, enim est consectetur nisi, quis consequat ipsum ante ut nisi. Fusce cursus, nisl quis bibendum gravida, nisi ex tempor augue, sit amet ultricies libero felis et odio. Duis posuere magna ante, id elementum mi tincidunt ac.
+
+  Quisque vulputate malesuada mi. Ut vulputate enim non mi lobortis mollis. Ut tincidunt enim vitae sagittis vulputate. Nulla elementum arcu id libero semper volutpat. Duis tristique condimentum malesuada. Cras accumsan nulla quis enim ultrices aliquet. Phasellus tempor augue sit amet vestibulum luctus.
+
+  Quisque tempus at arcu a faucibus. Mauris varius feugiat eros vel sollicitudin. Suspendisse potenti. Nunc at augue sit amet ipsum elementum tristique. Nullam eros nibh, fermentum a euismod quis, porta et lacus. Suspendisse augue orci, tincidunt vitae nisl eu, luctus viverra mi. Phasellus at nibh leo. Phasellus eleifend facilisis cursus. Etiam leo erat, luctus ac porttitor non, cursus at diam. Etiam sit amet nibh aliquam, vestibulum est eget, dapibus risus. Quisque risus lorem, ullamcorper ac semper quis, maximus ut sapien. Mauris augue lectus, dignissim quis efficitur varius, maximus eu metus. Nunc faucibus posuere nunc id sodales.</span>
+            </mat-card>
+          </div>
+          <!--[@routerTransition]="o.isActivated && o.activatedRoute.routeConfig.path">-->
+          <!--<router-outlet #o="outlet"></router-outlet>-->
+        </div>
+    </main>
+
+    <footer>
+      <div fxLayout="row">
+        <div fxFlex fxLayout="column">
           <a href="https://github.com/valneras/angular-deploy" target="_blank">
             <i class="fa fa-github fa-2x" aria-hidden="true"></i>
-            <span>Github</span>
+            <span>Open my Github</span>
           </a>
         </div>
-      </div>
-      <div class="row">
-        <div class="col-12 signature">
+        <div fxFlex >
           &#169; {{year}} - Vincent
           <a matTooltip="Show changelog"
              matTooltipPosition="before"
@@ -66,8 +93,7 @@
           </a>
         </div>
       </div>
-    </div>
-
-  </div>
-
-</mat-sidenav-container>
+    </footer>
+   </mat-sidenav-content>
+ </mat-sidenav-container>
+</div>
