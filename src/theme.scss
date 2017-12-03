@@ -19,19 +19,33 @@ $theme: mat-light-theme($primary, $accent);
   $candy-app-theme:   mat-light-theme($candy-app-primary, $candy-app-accent);
 
   $toolbar-app-primary: mat-palette($mat-blue-grey, A200, A100, A400);
-  $toolbar-app-accent:  mat-palette($mat-red, 100);
-  $toolbar-app-theme:   mat-light-theme($toolbar-app-primary, $toolbar-app-accent);
+  $toolbar-app-accent:  mat-palette($mat-red, 200);
+  $toolbar-app-theme:   mat-dark-theme($toolbar-app-primary, $toolbar-app-accent);
 
   @include angular-material-theme($dark-theme);
   @include mat-card-theme($candy-app-theme);
   @include mat-toolbar-theme($toolbar-app-theme);
 
-  .mat-toolbar{
+  mat-toolbar{
     z-index: 99999;
-    .mat-transparent {
-      background-color: rgba(0, 0, 0, 0) !important;
+    background-color: rgba(0, 0, 0, 0) !important;
+    &.mat-transparent {
+      background-color: rgba(10, 0, 0, 0) !important;
+    }
+    &.mat-primary{
+      background-color: rgba(21, 20, 20, 0.5019607843137255) !important;
+      color:white !important;
+      -webkit-box-shadow: 0 2px 4px -1px rgba(0,0,0,0.06), 0 4px 5px 0 rgba(0,0,0,0.06), 0 1px 10px 0 rgba(0,0,0,0.08);
+      box-shadow: 0 2px 4px -1px rgba(0,0,0,0.06), 0 4px 5px 0 rgba(0,0,0,0.06), 0 1px 10px 0 rgba(0,0,0,0.08);
     }
   }
+  $custom-typography: mat-typography-config(
+    $font-family: "'Quantico', cursive",
+    $headline: mat-typography-level(32px, 48px, 700),
+    $body-1: mat-typography-level(16px, 24px, 500)
+  );
+  // Override typography for all Angular Material, including mat-base-typography and all components.
+  @include angular-material-typography($custom-typography);
 
 
 }

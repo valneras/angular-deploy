@@ -1,3 +1,4 @@
+<div class="bg"></div>
 <div fxLayout="column" fxFlex [class.dark-theme]="isDarkTheme" (scroll)="onScrollEvent($event)">
  <mat-sidenav-container cdk-scrollable fullscreen style="height: 100%; overflow: auto;">
   <mat-sidenav #sidenav mode="push">
@@ -17,9 +18,9 @@
           <mat-icon>clear_all</mat-icon>
         </button>
 
-        <span routerLink="">Angular DEMO</span>
+        <span class="title" routerLink="">Angular DEMO</span>
 
-        <span fxHide fxShow.gt-sm>
+        <span fxHide fxShow.gt-sm fxFlex fxLayout="row"  fxLayoutAlign="center center" >
           <button mat-button class="nav-button" *ngFor="let item of navigation"
                   [routerLink]="[item.link]" routerLinkActive="active">
             {{item.label}}
