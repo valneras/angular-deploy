@@ -38,19 +38,79 @@ mat-sidenav {
   flex: 1 1 auto;
 }
 
-main,.content,mat-sidenav-container {
+main {
   height: 100%;
 }
 main{
-  margin-top:50px;
+  margin-top:65px;
 }
 mat-toolbar{
   transition:background .25s ease-in-out,padding .25s ease-in-out;
   background: 0 0;
 }
-mat-sidenav-content{
-
+.toolbar-background{
+  top: -33px;
+  width: 101%;
+  background-color: rgba(21, 20, 20, 0.5019607843137255);//rgba(0,0,0,.6);
+  height: 101px;
+  position: fixed;
+  transform: rotate(-0.9deg);
+  z-index: -1;
+  left: -5px;
+  -webkit-box-shadow: 0 2px 4px -1px rgba(0,0,0,0.06), 0 4px 5px 0 rgba(0,0,0,0.06), 0 1px 10px 0 rgba(0,0,0,0.08);
+  box-shadow: 0 2px 4px -1px rgba(0,0,0,0.06), 0 4px 5px 0 rgba(0,0,0,0.06), 0 1px 10px 0 rgba(0,0,0,0.08);
+  &.hide {
+    opacity: 0;
+    visibility: hidden;
+    transition-property: opacity, visibility;
+    transition-duration: 1s, 1s;
+    transition-delay: 0s, 2s;
+  }
+  &.show {
+    opacity: 1;
+    visibility: visible;
+    transition-property: visibility, opacity;
+    transition-duration: 2s, 1s;
+  }
 }
+
+section{
+  &.content {
+    height: 90vh;
+    padding: 5px;
+    display: flex;
+  }
+  .box-background{
+    background-color: rgba(169, 176, 183, 0.43921568627450);
+    //background-color: rgba(162, 45, 158, 0.439216);
+    transform: rotate(-0.9deg);
+    z-index: -1;
+    left: 7px;
+    height: 90vh;
+    width: 100%;
+    position: absolute;
+    -webkit-box-shadow: 0 2px 4px -1px rgba(0,0,0,0.06), 0 4px 5px 0 rgba(0,0,0,0.06), 0 1px 10px 0 rgba(0,0,0,0.08);
+    box-shadow: 0 2px 4px -1px rgba(0,0,0,0.06), 0 4px 5px 0 rgba(0,0,0,0.06), 0 1px 10px 0 rgba(0,0,0,0.08);
+    border-radius:2px;
+    border: 1px solid #ab8d8d30;
+  }
+  .box-background.slidein{
+    background-color: rgba(162, 45, 158, 0.439216);
+    transform: rotate(-2.9deg);
+    transition-property: transform;
+    transition-duration: 2s;
+    transition-delay: 2s;
+  }
+  .box-main{
+    margin-top: 17px;
+    margin-left: 8px;
+  }
+  .box-main:active{
+    background-color: orangered;
+
+  }
+}
+
 
 footer{
   background-color: rgba(218, 218, 218, 0.36);

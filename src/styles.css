@@ -6,6 +6,9 @@
 html, body {
   display: flex;
   flex-direction: column;
+  overflow: -moz-scrollbars-vertical;
+  overflow-x: hidden;
+  overflow-y: auto;
 
   /*font-family: Roboto, Arial, sans-serif;*/
   font-family: 'Quantico',cursive, Arial, sans-serif !important;

@@ -1,5 +1,5 @@
 <div class="bg"></div>
-<div fxLayout="column" fxFlex [class.dark-theme]="isDarkTheme" (scroll)="onScrollEvent($event)">
+<div fxLayout="column" fxFlex [class.dark-theme]="isDarkTheme" >
  <mat-sidenav-container cdk-scrollable fullscreen style="height: 100%; overflow: auto;">
   <mat-sidenav #sidenav mode="push">
      <div class="branding"><mat-icon>home</mat-icon> <span>Angular DEMO</span></div>
@@ -13,7 +13,8 @@
 
    <mat-sidenav-content (scroll)="onScrollEvent($event)">
     <header>
-      <mat-toolbar style="position:fixed;" color="{{ setColor ? 'primary' : 'transparent' }}">
+      <mat-toolbar style="position:fixed;" color="{{ toolbarScroll ? 'primary' : 'transparent' }}">
+        <div class="toolbar-background {{ toolbarScroll ? 'show' : 'hide' }}"></div>
         <button mat-icon-button (click)="sidenav.open()" fxHide fxShow.lt-md>
           <mat-icon>clear_all</mat-icon>
         </button>
@@ -44,37 +45,62 @@
       </mat-toolbar>
     </header>
 
-    <main>
-        <div #content class="content">
-          <div fxLayout="row" fxLayout.lt-md="column" fxLayoutGap="16px">
-            <mat-card fxFlex="80">
+    <main #main>
+      <section id="content-page-1" class="content" #content>
+        <div class="box-background"></div>
+        <div class="box-main">
+          <b>>**1**</b> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent vulputate ante at suscipit accumsan. Morbi condimentum enim non ex facilisis, sit amet bibendum ipsum euismod. Nam pharetra augue odio. Praesent nec vulputate eros. Sed eleifend accumsan urna, nec pretium lectus interdum id. Nam erat est, iaculis non purus id, lobortis ultrices elit. In vitae felis est. Sed pulvinar tincidunt rutrum. Duis ultricies mauris at justo rhoncus accumsan. Sed interdum sapien placerat lectus lobortis, et consequat ex ornare.
+
+          Aliquam pellentesque mattis dapibus. Mauris ut auctor est. Donec tellus metus, feugiat vulputate consequat non, rhoncus ac nulla. Praesent ipsum felis, blandit eu pulvinar a, iaculis vel leo. Sed blandit rhoncus erat vitae vestibulum. In turpis ex, finibus sed maximus non, ullamcorper vitae sem. Morbi sodales, neque vitae mollis tempor, enim est consectetur nisi, quis consequat ipsum ante ut nisi. Fusce cursus, nisl quis bibendum gravida, nisi ex tempor augue, sit amet ultricies libero felis et odio. Duis posuere magna ante, id elementum mi tincidunt ac.
+
+          Quisque vulputate malesuada mi. Ut vulputate enim non mi lobortis mollis. Ut tincidunt enim vitae sagittis vulputate. Nulla elementum arcu id libero semper volutpat. Duis tristique condimentum malesuada. Cras accumsan nulla quis enim ultrices aliquet. Phasellus tempor augue sit amet vestibulum luctus.
+
+          Quisque tempus at arcu a faucibus. Mauris varius feugiat eros vel sollicitudin.
+        </div>
+      </section>
+      <section id="content-page-2" class="content">
+        <div class="box-background"></div>
+        <div class="box-main">
+          <b>>**3**</b>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent vulputate ante at suscipit accumsan. Morbi condimentum enim non ex facilisis, sit amet bibendum ipsum euismod. Nam pharetra augue odio. Praesent nec vulputate eros. Sed eleifend accumsan urna, nec pretium lectus interdum id. Nam erat est, iaculis non purus id, lobortis ultrices elit. In vitae felis est. Sed pulvinar tincidunt rutrum. Duis ultricies mauris at justo rhoncus accumsan. Sed interdum sapien placerat lectus lobortis, et consequat ex ornare.
+
+          Aliquam pellentesque mattis dapibus. Mauris ut auctor est. Donec tellus metus, feugiat vulputate consequat non, rhoncus ac nulla. Praesent ipsum felis, blandit eu pulvinar a, iaculis vel leo. Sed blandit rhoncus erat vitae vestibulum. In turpis ex, finibus sed maximus non, ullamcorper vitae sem. Morbi sodales, neque vitae mollis tempor, enim est consectetur nisi, quis consequat ipsum ante ut nisi. Fusce cursus, nisl quis bibendum gravida, nisi ex tempor augue, sit amet ultricies libero felis et odio. Duis posuere magna ante, id elementum mi tincidunt ac.
+
+          Quisque vulputate malesuada mi. Ut vulputate enim non mi lobortis mollis. Ut tincidunt enim vitae sagittis vulputate. Nulla elementum arcu id libero semper volutpat. Duis tristique condimentum malesuada. Cras accumsan nulla quis enim ultrices aliquet. Phasellus tempor augue sit amet vestibulum luctus.
+
+          Quisque tempus at arcu a faucibus. Mauris varius feugiat eros vel sollicitudin.
+        </div>
+      </section>
+      <section id="content-page-3" class="content" fxLayout="column">
+        <div class="box-background"></div>
+        <div class="box-main">
+          <div fxLayout="row" fxLayout.lt-sm="column" fxFill fxFlex="20" fxFlex.lt-sm="100">
+            <mat-card fxFlex="60">
               <mat-icon>report</mat-icon>
               <h2>Hi Bro!</h2>
               <p>Test2</p>
             </mat-card>
 
-            <mat-card fxFlex fxLayout="column" fxLayoutGap="14px">
+            <mat-card fxFlex="40">
               <mat-slide-toggle>Is Admin?</mat-slide-toggle>
               <mat-slide-toggle>Is Cool?</mat-slide-toggle>
             </mat-card>
 
           </div>
-          <div fxLayout="row">
-            <mat-card fxFlex>
+          <div fxLayout="row"  fxLayout.lt-sm="column" fxFlex="80" fxFlex.lt-sm="100">
+            <mat-card fxFlex="100">
               <mat-icon>report</mat-icon>
               <h2>Other box</h2>
-              <span>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent vulputate ante at suscipit accumsan. Morbi condimentum enim non ex facilisis, sit amet bibendum ipsum euismod. Nam pharetra augue odio. Praesent nec vulputate eros. Sed eleifend accumsan urna, nec pretium lectus interdum id. Nam erat est, iaculis non purus id, lobortis ultrices elit. In vitae felis est. Sed pulvinar tincidunt rutrum. Duis ultricies mauris at justo rhoncus accumsan. Sed interdum sapien placerat lectus lobortis, et consequat ex ornare.
+              <span>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent vulputate ante at suscipit accumsan. Morbi condimentum enim non ex facilisis, sit amet bibendum ipsum euismod. Nam pharetra augue odio. Praesent nec vulputate eros. Sed eleifend accumsan urna, nec pretium lectus interdum id. Nam erat est, iaculis non purus id, lobortis ultrices elit. In vitae felis est. Sed pulvinar tincidunt rutrum.
 
-  Aliquam pellentesque mattis dapibus. Mauris ut auctor est. Donec tellus metus, feugiat vulputate consequat non, rhoncus ac nulla. Praesent ipsum felis, blandit eu pulvinar a, iaculis vel leo. Sed blandit rhoncus erat vitae vestibulum. In turpis ex, finibus sed maximus non, ullamcorper vitae sem. Morbi sodales, neque vitae mollis tempor, enim est consectetur nisi, quis consequat ipsum ante ut nisi. Fusce cursus, nisl quis bibendum gravida, nisi ex tempor augue, sit amet ultricies libero felis et odio. Duis posuere magna ante, id elementum mi tincidunt ac.
-
-  Quisque vulputate malesuada mi. Ut vulputate enim non mi lobortis mollis. Ut tincidunt enim vitae sagittis vulputate. Nulla elementum arcu id libero semper volutpat. Duis tristique condimentum malesuada. Cras accumsan nulla quis enim ultrices aliquet. Phasellus tempor augue sit amet vestibulum luctus.
-
-  Quisque tempus at arcu a faucibus. Mauris varius feugiat eros vel sollicitudin. Suspendisse potenti. Nunc at augue sit amet ipsum elementum tristique. Nullam eros nibh, fermentum a euismod quis, porta et lacus. Suspendisse augue orci, tincidunt vitae nisl eu, luctus viverra mi. Phasellus at nibh leo. Phasellus eleifend facilisis cursus. Etiam leo erat, luctus ac porttitor non, cursus at diam. Etiam sit amet nibh aliquam, vestibulum est eget, dapibus risus. Quisque risus lorem, ullamcorper ac semper quis, maximus ut sapien. Mauris augue lectus, dignissim quis efficitur varius, maximus eu metus. Nunc faucibus posuere nunc id sodales.</span>
+              </span>
             </mat-card>
           </div>
           <!--[@routerTransition]="o.isActivated && o.activatedRoute.routeConfig.path">-->
           <!--<router-outlet #o="outlet"></router-outlet>-->
         </div>
+      </section>
+
+
     </main>
 
     <footer>
