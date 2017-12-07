@@ -5,8 +5,10 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {FlexLayoutModule} from '@angular/flex-layout';
 import { MaterialModule } from './material.module';
 import { AppComponent } from './app.component';
+import { ScrollToModule } from '@nicky-lenaers/ngx-scroll-to';
 
 import { AppRoutingModule } from './app-routing.module';
+import {NgxCarouselModule} from 'ngx-carousel';
 
 @NgModule({
   declarations: [
@@ -18,7 +20,9 @@ import { AppRoutingModule } from './app-routing.module';
     MaterialModule,
     AppRoutingModule,
     FlexLayoutModule,
-    HttpModule
+    HttpModule,
+    ScrollToModule.forRoot(),
+    NgxCarouselModule
   ],
   providers: [],
   bootstrap: [AppComponent]

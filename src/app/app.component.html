@@ -11,9 +11,9 @@
      </mat-nav-list>
   </mat-sidenav>
 
-   <mat-sidenav-content (scroll)="onScrollEvent($event)">
+   <mat-sidenav-content (scroll)="onScrollEvent($event)" fxLayout="column">
     <header>
-      <mat-toolbar style="position:fixed;" color="{{ toolbarScroll ? 'primary' : 'transparent' }}">
+      <mat-toolbar style="position:fixed;" >
         <div class="toolbar-background {{ toolbarScroll ? 'show' : 'hide' }}"></div>
         <button mat-icon-button (click)="sidenav.open()" fxHide fxShow.lt-md>
           <mat-icon>clear_all</mat-icon>
@@ -45,34 +45,55 @@
       </mat-toolbar>
     </header>
 
-    <main #main >
-      <section id="content-page-1" class="content" #content >
+    <main #main fxFlex>
+      <section id="content-page-1" class="content show" #content  fxLayout="column" >
         <div class="box-background" ></div>
-        <div class="box-main">
+        <div class="box-main" fxFlex="85">
           <b>>**1**</b> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent vulputate ante at suscipit accumsan. Morbi condimentum enim non ex facilisis, sit amet bibendum ipsum euismod. Nam pharetra augue odio. Praesent nec vulputate eros. Sed eleifend accumsan urna, nec pretium lectus interdum id. Nam erat est, iaculis non purus id, lobortis ultrices elit. In vitae felis est. Sed pulvinar tincidunt rutrum. Duis ultricies mauris at justo rhoncus accumsan. Sed interdum sapien placerat lectus lobortis, et consequat ex ornare.
 
           Aliquam pellentesque mattis dapibus. Mauris ut auctor est. Donec tellus metus, feugiat vulputate consequat non, rhoncus ac nulla. Praesent ipsum felis, blandit eu pulvinar a, iaculis vel leo. Sed blandit rhoncus erat vitae vestibulum. In turpis ex, finibus sed maximus non, ullamcorper vitae sem. Morbi sodales, neque vitae mollis tempor, enim est consectetur nisi, quis consequat ipsum ante ut nisi. Fusce cursus, nisl quis bibendum gravida, nisi ex tempor augue, sit amet ultricies libero felis et odio. Duis posuere magna ante, id elementum mi tincidunt ac.
 
           Quisque vulputate malesuada mi. Ut vulputate enim non mi lobortis mollis. Ut tincidunt enim vitae sagittis vulputate. Nulla elementum arcu id libero semper volutpat. Duis tristique condimentum malesuada. Cras accumsan nulla quis enim ultrices aliquet. Phasellus tempor augue sit amet vestibulum luctus.
+          <br/>
 
-          Quisque tempus at arcu a faucibus. Mauris varius feugiat eros vel sollicitudin.
+        </div>
+        <div fxLayoutAlign="center end">
+          <button mat-fab color="primary" [ngx-scroll-to]="'content-page-2'" [ngx-scroll-to-easing]="'easeOutElastic'" [ngx-scroll-to-duration]="2500"  [ngx-scroll-to-offset]="-60">
+            <mat-icon aria-label="Next">keyboard_arrow_down</mat-icon>
+          </button>
         </div>
       </section>
       <section id="content-page-2" class="content">
         <div class="box-background" ></div>
         <div class="box-main">
-          <b>>**3**</b>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent vulputate ante at suscipit accumsan. Morbi condimentum enim non ex facilisis, sit amet bibendum ipsum euismod. Nam pharetra augue odio. Praesent nec vulputate eros. Sed eleifend accumsan urna, nec pretium lectus interdum id. Nam erat est, iaculis non purus id, lobortis ultrices elit. In vitae felis est. Sed pulvinar tincidunt rutrum. Duis ultricies mauris at justo rhoncus accumsan. Sed interdum sapien placerat lectus lobortis, et consequat ex ornare.
-
+          <b>>**3**</b>
           Aliquam pellentesque mattis dapibus. Mauris ut auctor est. Donec tellus metus, feugiat vulputate consequat non, rhoncus ac nulla. Praesent ipsum felis, blandit eu pulvinar a, iaculis vel leo. Sed blandit rhoncus erat vitae vestibulum. In turpis ex, finibus sed maximus non, ullamcorper vitae sem. Morbi sodales, neque vitae mollis tempor, enim est consectetur nisi, quis consequat ipsum ante ut nisi. Fusce cursus, nisl quis bibendum gravida, nisi ex tempor augue, sit amet ultricies libero felis et odio. Duis posuere magna ante, id elementum mi tincidunt ac.
 
-          Quisque vulputate malesuada mi. Ut vulputate enim non mi lobortis mollis. Ut tincidunt enim vitae sagittis vulputate. Nulla elementum arcu id libero semper volutpat. Duis tristique condimentum malesuada. Cras accumsan nulla quis enim ultrices aliquet. Phasellus tempor augue sit amet vestibulum luctus.
+          <ngx-carousel
+            [inputs]="carouselBanner"
+            [moveToSlide]="1"
+            (onMove)="onmoveFn($event)">
 
-          Quisque tempus at arcu a faucibus. Mauris varius feugiat eros vel sollicitudin.
+            <ngx-item NgxCarouselItem class="bannerStyle" style="background: url('assets/intro.jpg');">
+              <h1>1</h1>
+            </ngx-item>
+
+            <ngx-item NgxCarouselItem class="bannerStyle">
+              <h1>2</h1>
+            </ngx-item>
+
+            <ngx-item NgxCarouselItem class="bannerStyle">
+              <h1>3</h1>
+            </ngx-item>
+
+            <button NgxCarouselPrev class='leftRs'>&lt;</button>
+            <button NgxCarouselNext class='rightRs'>&gt;</button>
+          </ngx-carousel>
         </div>
       </section>
-      <section id="content-page-3" class="content" fxLayout="column">
+      <section id="content-page-3" class="content">
         <div class="box-background"></div>
-        <div class="box-main">
+        <div class="box-main" fxLayout="column">
           <div fxLayout="row" fxLayout.lt-sm="column" fxFill fxFlex="20" fxFlex.lt-sm="100">
             <mat-card fxFlex="60">
               <mat-icon>report</mat-icon>
@@ -103,23 +124,23 @@
 
     </main>
 
-    <footer>
-      <div fxLayout="row">
-        <div fxFlex fxLayout="column">
+    <footer fxLayout="row">
+        <div fxFlex="20">
           <a href="https://github.com/valneras/angular-deploy" target="_blank">
             <i class="fa fa-github fa-2x" aria-hidden="true"></i>
             <span>Open my Github</span>
           </a>
         </div>
-        <div fxFlex >
-          &#169; {{year}} - Vincent
-          <a matTooltip="Show changelog"
-             matTooltipPosition="before"
-             href="https://github.com/valneras/angular-deploy/CHANGELOG.md">
-            <i class="fa fa-rocket"></i> V1
-          </a>
+        <div fxFlex  fxLayoutAlign="center center">
+          <div fxFlexAlign="center">
+            &#169; {{year}} - Vincent
+            <a matTooltip="Show changelog"
+               matTooltipPosition="before"
+               href="https://github.com/valneras/angular-deploy/CHANGELOG.md">
+              <i class="fa fa-rocket"></i> V1
+            </a>
+          </div>
         </div>
-      </div>
     </footer>
    </mat-sidenav-content>
  </mat-sidenav-container>
