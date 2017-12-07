@@ -1,10 +1,20 @@
 import {Component, HostListener, ViewChild, Renderer2} from '@angular/core';
 import {Router, RouterLink} from '@angular/router';
+import { ScrollEvent } from 'ngx-scroll-event';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
+  // ,
+  // template: `
+  //   ...
+  //   <h1 trackScroll
+  //       (trackScrollEnter)="enter()"
+  //       (trackScrollLeave)="leave()">Component Title</h1>
+  //   <!-- Further content here -->
+  //   ...
+  // `
 })
 export class AppComponent {
   @ViewChild('content') content;
@@ -30,29 +40,52 @@ export class AppComponent {
   onScrollEvent($event) {
     // console.log("top:"+this.content.nativeElement.getBoundingClientRect().top+" / bottom:"+
     // this.content.nativeElement.getBoundingClientRect().bottom);
-    // console.log(this.content);
+    //  console.log($event);
     let scrollTopPosition=$event.target.scrollTop;
+    let scrollPos =$event.target.scrollY;
     let scrollHeight=$event.target.scrollHeight;
     let windowBottomPosition = (scrollTopPosition + scrollHeight);
+    // console.log("ST="+$event.target.scrollTop);
     Object.keys(this.main.nativeElement.children).forEach(item => {
       let currentSection=this.main.nativeElement.children[item];
+      // console.log('scrolltop:'+currentSection.scrollTop);
       let sectionTopPosition = (currentSection.offsetTop);
       let sectionHeight = (currentSection.getBoundingClientRect().height);
       let sectionBottomPosition = (sectionTopPosition+sectionHeight);
-      console.log('itemid:'+currentSection.id+': sectionBottomPosition:'+sectionTopPosition+'sectionHeight'+sectionHeight+' >= scrollTop:'+scrollTopPosition);
-      console.log('itemid:'+currentSection.id+': sectionTopPosition:'+sectionTopPosition+' <= windowBottomPosition:'+windowBottomPosition);
+      console.log('itemid:'+currentSection.id+' > sectionTopPosition:'+sectionTopPosition+' to sectionBottomPosition:'+sectionBottomPosition+' >= scrollTop:'+scrollTopPosition+"/scrollHeight:"+scrollHeight);
+      // console.log('itemid:'+currentSection.id+': sectionTopPosition:'+sectionTopPosition+' <= windowBottomPosition:'+windowBottomPosition);
       // console.log('itemid:'+currentSection.id+' / itemtop:'+sectionTopPosition+' / itemh:'+currentSection.getBoundingClientRect().height+' / itembottom:'+currentSection.getBoundingClientRect().bottom)
       // if(item.getBoundingClientRect().top)
       // console.log(this.main.nativeElement.children[item].getBoundingClientRect().top);
-      if ((sectionBottomPosition >= scrollTopPosition) && (sectionTopPosition <= windowBottomPosition)) {
+      if ((scrollTopPosition >= sectionTopPosition) && (scrollTopPosition <= sectionBottomPosition)) {
+      // if (scrollPos >= sectionTopPosition || (scrollPos + window.innerHeight) >= (sectionTopPosition + sectionHeight)) {
         this.renderer.addClass(currentSection, 'slidein');
       } else {
         this.renderer.removeClass(currentSection, 'slidein');
-        // currentSection.setElementClass(item, "slidein", false);
       }
+        // currentSection.setElementClass(item, "slidein", false);
     });
     this.toolbarScroll = this.content.nativeElement.getBoundingClientRect().top < 18;
 
 
+  }
+
+  public handleScroll(event: ScrollEvent) {
+    console.log('scroll occurred', event.originalEvent);
+    if (event.isReachingBottom) {
+      console.log(`the user is reaching the bottom`);
+    }
+    if (event.isWindowEvent) {
+      console.log(`This event is fired on Window not on an element.`);
+    }
+
+  }
+
+  enter() {
+    console.log('Track scroll enter is working!');
+  }
+
+  leave() {
+    console.log('Track scroll leave is working too!');
   }
 }
