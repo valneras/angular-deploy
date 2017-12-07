@@ -1,6 +1,5 @@
 import {Component, HostListener, ViewChild, Renderer2} from '@angular/core';
 import {Router, RouterLink} from '@angular/router';
-import { ScrollEvent } from 'ngx-scroll-event';
 
 @Component({
   selector: 'app-root',
@@ -43,7 +42,7 @@ export class AppComponent {
     //  console.log($event);
     let scrollTopPosition=$event.target.scrollTop;
     let scrollPos =$event.target.scrollY;
-    let scrollHeight=$event.target.scrollHeight;
+    let scrollHeight=window.innerHeight;
     let windowBottomPosition = (scrollTopPosition + scrollHeight);
     // console.log("ST="+$event.target.scrollTop);
     Object.keys(this.main.nativeElement.children).forEach(item => {
@@ -52,16 +51,20 @@ export class AppComponent {
       let sectionTopPosition = (currentSection.offsetTop);
       let sectionHeight = (currentSection.getBoundingClientRect().height);
       let sectionBottomPosition = (sectionTopPosition+sectionHeight);
-      console.log('itemid:'+currentSection.id+' > sectionTopPosition:'+sectionTopPosition+' to sectionBottomPosition:'+sectionBottomPosition+' >= scrollTop:'+scrollTopPosition+"/scrollHeight:"+scrollHeight);
+      // console.log('itemid:'+currentSection.id+' > sectionTopPosition:'+sectionTopPosition+' to sectionBottomPosition:'+sectionBottomPosition+' >= scrollTop:'+scrollTopPosition+"/windowBottomPosition:"+windowBottomPosition);
       // console.log('itemid:'+currentSection.id+': sectionTopPosition:'+sectionTopPosition+' <= windowBottomPosition:'+windowBottomPosition);
       // console.log('itemid:'+currentSection.id+' / itemtop:'+sectionTopPosition+' / itemh:'+currentSection.getBoundingClientRect().height+' / itembottom:'+currentSection.getBoundingClientRect().bottom)
       // if(item.getBoundingClientRect().top)
       // console.log(this.main.nativeElement.children[item].getBoundingClientRect().top);
-      if ((scrollTopPosition >= sectionTopPosition) && (scrollTopPosition <= sectionBottomPosition)) {
+      // if ((scrollTopPosition >= sectionTopPosition) && (scrollTopPosition <= sectionBottomPosition)) {
+        if ((sectionBottomPosition >= scrollTopPosition) && (sectionTopPosition+50 <= windowBottomPosition)) {
       // if (scrollPos >= sectionTopPosition || (scrollPos + window.innerHeight) >= (sectionTopPosition + sectionHeight)) {
-        this.renderer.addClass(currentSection, 'slidein');
+        this.renderer.addClass(currentSection.querySelector('.box-background'), 'slidein');
+          // console.log('itemid:'+currentSection.id+' > slidein');
+          // console.log('itemid:'+currentSection.id+' > sectionBottomPosition:'+sectionBottomPosition+'> scrollTopPosition:'+scrollTopPosition+' && sectionTopPosition:'+sectionTopPosition+"("+currentSection.getBoundingClientRect().top+")<windowBottomPosition:"+windowBottomPosition);
       } else {
-        this.renderer.removeClass(currentSection, 'slidein');
+        this.renderer.removeClass(currentSection.querySelector('.box-background'), 'slidein');
+          // console.log('itemid:'+currentSection.id+' > slideout');
       }
         // currentSection.setElementClass(item, "slidein", false);
     });
@@ -70,22 +73,22 @@ export class AppComponent {
 
   }
 
-  public handleScroll(event: ScrollEvent) {
-    console.log('scroll occurred', event.originalEvent);
-    if (event.isReachingBottom) {
-      console.log(`the user is reaching the bottom`);
-    }
-    if (event.isWindowEvent) {
-      console.log(`This event is fired on Window not on an element.`);
-    }
-
-  }
-
-  enter() {
-    console.log('Track scroll enter is working!');
-  }
-
-  leave() {
-    console.log('Track scroll leave is working too!');
-  }
+  // public handleScroll(event: ScrollEvent) {
+  //   console.log('scroll occurred', event.originalEvent);
+  //   if (event.isReachingBottom) {
+  //     console.log(`the user is reaching the bottom`);
+  //   }
+  //   if (event.isWindowEvent) {
+  //     console.log(`This event is fired on Window not on an element.`);
+  //   }
+  //
+  // }
+  //
+  // enter() {
+  //   console.log('Track scroll enter is working!');
+  // }
+  //
+  // leave() {
+  //   console.log('Track scroll leave is working too!');
+  // }
 }

@@ -83,7 +83,7 @@ section{
   .box-background{
     background-color: rgba(169, 176, 183, 0.43921568627450);
     //background-color: rgba(162, 45, 158, 0.439216);
-    transform: rotate(-0.9deg);
+    //transform: rotate(-0.9deg);
     z-index: -1;
     left: 7px;
     height: 90vh;
@@ -93,21 +93,19 @@ section{
     box-shadow: 0 2px 4px -1px rgba(0,0,0,0.06), 0 4px 5px 0 rgba(0,0,0,0.06), 0 1px 10px 0 rgba(0,0,0,0.08);
     border-radius:2px;
     border: 1px solid #ab8d8d30;
-  }
+      }
   .box-background.slidein{
-    background-color: rgba(162, 45, 158, 0.439216);
-    transform: rotate(-2.9deg);
+    //background-color: rgba(169, 176, 183, 0.43921568627450);
+    //background-color: rgba(162, 45, 158, 0.439216);
+    transform: rotate(-1.0deg);
     transition-property: transform;
     transition-duration: 2s;
-    transition-delay: 2s;
+    transition-delay: 0s;
+
   }
   .box-main{
     margin-top: 17px;
     margin-left: 8px;
-  }
-  .box-main:active{
-    background-color: orangered;
-
   }
 }
 
